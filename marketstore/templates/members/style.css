@@ -1,0 +1,93 @@
+body{
+    background-color: blue;
+}
+.signup-box{
+    width: 360px;
+    height: 620px;
+    margin: auto;
+    background-color: white;
+    border-radius: 3px;
+}
+
+h1{
+    text-align: center;
+    padding-top: 15px;
+}
+h4{
+    text-align: center;
+}
+
+form{
+    width: 300px;
+    margin-left: 20px;
+}
+
+form label{
+    display: flex;
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+form input{
+    width: 100%;
+    padding: 7px;
+    border: none;
+    border: 1px solid gray;
+    border-radius: 6px;
+    outline: none;
+}
+
+.sign{
+    width:320px;
+    height: 35px;
+    margin-top: 20px;
+    border: none;
+    background-color: green;
+    color: white;
+    font-size: 18px; 
+}
+
+.login-box{
+    width: 500px;
+    height: 50vh;
+    background-color:white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1{
+    text-align: center;
+    padding-top: 15px;
+}
+
+form{
+   width: 300px;
+   margin-left: 20px;
+}
+
+form label{
+    display: flex;
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+
+form input{
+    width: 100%;
+    padding: 7px;
+    border: none;
+    border: 1px solid gray;
+    border-radius: 6px;
+    outline: none; 
+}
+    
+  .aplha{
+    width:320px;
+    height: 35px;
+    margin-top: 20px;
+    border: none;
+    background-color: green;
+    color: white;
+    font-size: 18px; 
+  }  

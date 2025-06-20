@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}{{ item.title }}{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-md-6">
+    {% if item.images.all %}
+    <div id="carouselIndicators" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        {% for img in item.images.all %}
+          <div class="carousel-item {% if forloop.first %}active{% endif %}">
+            <img src="{{ img.image.url }}" class="d-block w-100" alt="{{ item.title }}">
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+  <div class="col-md-6">
+    <h2>{{ item.title }}</h2>
+    <p>{{ item.description }}</p>
+    <p><strong>Price:</strong> ₦{{ item.price }}{% if item.negotiable %} (Negotiable){% endif %}</p>
+    <p><strong>Condition:</strong> {{ item.get_condition_display }}</p>
+    <p><strong>Location:</strong> {{ item.location }}</p>
+    <p><strong>Seller:</strong> {{ item.seller.username }}</p>
+
+    {% if item.status == 'available' and not item.is_sold %}
+      <a href="{% url 'purchase_item' item.pk %}" class="btn btn-success mb-3">Purchase</a>
+    {% endif %}
+
+    {% if user.is_authenticated and user != item.seller %}
+      <h4>Contact Seller</h4>
+      <form method="post" action="{% url 'contact_seller' item.pk %}">
+        {% csrf_token %}
+        <textarea name="content" class="form-control mb-2" rows="3" placeholder="Your message" required></textarea>
+        <button class="btn btn-primary">Send</button>
+      </form>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block title %}Purchase {{ item.title }}{% endblock %}
+{% block content %}
+<h2>Confirm Purchase</h2>
+<p>You are about to purchase <strong>{{ item.title }}</strong> for ₦{{ item.price }}.</p>
+<form method="post">{% csrf_token %}<button class="btn btn-success">Confirm</button><a href="{% url 'item_detail' item.pk %}" class="btn btn-secondary ms-2">Cancel</a></form>
+{% endblock %}

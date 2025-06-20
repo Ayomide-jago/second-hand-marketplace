@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Sell Item{% endblock %}
+{% block content %}
+<h2>Sell an Item</h2>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="mb-3"><label class="form-label">Title</label><input name="title" class="form-control" required></div>
+  <div class="mb-3"><label class="form-label">Description</label><textarea name="description" class="form-control" rows="4" required></textarea></div>
+  <div class="mb-3"><label class="form-label">Price (₦)</label><input type="number" step="0.01" name="price" class="form-control" required></div>
+  <div class="form-check mb-3"><input class="form-check-input" type="checkbox" name="negotiable" id="negotiable"><label class="form-check-label" for="negotiable">Negotiable</label></div>
+  <div class="mb-3"><label class="form-label">Category</label><select name="category" class="form-select" required>{% for c in categories %}<option value="{{ c.id }}">{{ c.name }}</option>{% endfor %}</select></div>
+  <div class="mb-3"><label class="form-label">Condition</label><select name="condition" class="form-select" required>{% for v,d in condition_choices %}<option value="{{ v }}">{{ d }}</option>{% endfor %}</select></div>
+  <div class="mb-3"><label class="form-label">Location</label><input name="location" class="form-control" required></div>
+  <div class="mb-3"><label class="form-label">Images</label><input type="file" name="images" class="form-control" multiple></div>
+  <button class="btn btn-primary">Create</button>
+</form>
+{% endblock %}
