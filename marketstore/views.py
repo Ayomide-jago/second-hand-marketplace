@@ -87,7 +87,7 @@ def item_detail_view(request, pk):
     return render(request, "item_detail.html", {"item": item})
 
 
-@login_required(login_url='/login/')
+@login_required(login_url='login')
 def contact_seller_view(request, pk):
     item = get_object_or_404(Item, pk=pk)
     if request.method == "POST":
@@ -97,7 +97,7 @@ def contact_seller_view(request, pk):
             messages.success(request, "Message sent!")
     return redirect("item_detail", pk=pk)
 
-@login_required(login_url='/login/')
+@login_required(login_url='login')
 def create_item_view(request):
     categories = Category.objects.all()
     if request.method == "POST":
@@ -130,7 +130,7 @@ def create_item_view(request):
     context = {"categories": categories, "condition_choices": Item.CONDITION_CHOICES}
     return render(request, "item_create.html", context)
 
-@login_required(login_url='/login/')
+@login_required(login_url='login')
 def purchase_item_view(request, pk):
     item = get_object_or_404(Item, pk=pk, status="available", is_sold=False)
     if item.seller == request.user:
@@ -151,17 +151,17 @@ def purchase_item_view(request, pk):
 # USER VIEWS (ADDED)
 # ────────────────────────────────────────────
 
-@login_required
+@login_required(login_url='login')
 def seller_dashboard_view(request):
     items = Item.objects.filter(seller=request.user).order_by("-date_posted")
     return render(request, "seller_dashboard.html", {"items": items})
 
-@login_required
+@login_required(login_url='login')
 def seller_messages_view(request):
     messages_received = Message.objects.filter(receiver=request.user).select_related("item", "sender").order_by("-sent_date")
     return render(request, "seller_messages.html", {"messages": messages_received})
 
-@login_required
+@login_required(login_url='login')
 def buyer_purchases_view(request):
     purchased_items = Item.objects.filter(status="sold", is_sold=True, messages__sender=request.user).distinct()
     return render(request, "buyer_purchases.html", {"items": purchased_items})
